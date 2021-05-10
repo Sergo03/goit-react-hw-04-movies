@@ -4,6 +4,7 @@ import HomePage from './views/HomePage'
 import MoviesPage from './views/MoviesPage'
 import MovieDetailsPage from './views/MovieDetailsPage'
 
+
 const App=()=> {
   return (
     < >
@@ -26,9 +27,11 @@ const App=()=> {
 
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/movies/:movieId" component={MovieDetailsPage} />
+        <Route path="/movies/:movieId" component={MovieDetailsPage} />
         <Route exact path="/movies" component={MoviesPage} />
-        <Route component={HomePage} />
+        {/* <Route exact path="/movies/:movieId/cast" component={Cast} />
+        <Route exact path="/movies/:movieId/reviews" component={Reviews} /> */}
+        {/* <Route component={HomePage} /> */}
       </Switch>
        
     </>

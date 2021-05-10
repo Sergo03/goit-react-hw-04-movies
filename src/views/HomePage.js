@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link , Route} from 'react-router-dom';
+
 
 class HomePage extends Component {
 
@@ -8,34 +9,27 @@ class HomePage extends Component {
      movies:[],
     }
 
-
-
-
-
    async componentDidMount() {
-       const response = await Axios.get(' https://api.themoviedb.org/3/trending/all/day?api_key=a11681fbc130343b10afc879742afe20')
-    //    console.log(response.data.results);
+       const response = await Axios.get(' https://api.themoviedb.org/3/trending/movie/day?api_key=a11681fbc130343b10afc879742afe20')
+   
        this.setState({ movies:response.data.results})
        
 }
 
 
-
-
     render() {
         const { movies}=this.state
-        
+        console.log(movies);
       
         return (
             <>
                 <ul>
-                    {movies.map(({name,id,title}) => {
-                        return (
-                            <li key={id}>
+                    {movies.map(({id,title,name}) => (
+                        
+                         <li key={id}>
                                 <Link to={`/movies/${id}`}>{title}</Link>
-                            </li>
-                       )
-                    })}
+                        </li>
+                    ))}
                 </ul>
             </>
         )
