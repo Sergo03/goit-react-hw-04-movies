@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { Link,Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 class MoviesPage extends Component{
     state = {
@@ -11,25 +12,41 @@ class MoviesPage extends Component{
      this.setState({ query: e.currentTarget.value })
      
     }
-
+  
+   componentDidMount() {
+    const { location } = this.props;
+      
+    const getMovies = new URLSearchParams(location.search).get('query');
     
-    async componentDidMount() {
-    //     const { query } = this.state
-    //     console.log(query);
-    //    const response = await Axios.get(`https://api.themoviedb.org/3/search/movie?api_key=a11681fbc130343b10afc879742afe20&query=${query}&page=1`)
-    //    console.log(response.data.results);
-    //    this.setState({ movies:response.data.results})
-       
+    if (!getMovies) {
+      return;
+       }
+    this.onSubmit(getMovies);
     }
-       handleSubmit = async e => {
-           e.preventDefault();
-           const { query } = this.state
-          
-       const response = await Axios.get(`https://api.themoviedb.org/3/search/movie?api_key=a11681fbc130343b10afc879742afe20&query=${query}&page=1`)
-           
-           this.setState({ movies:response.data.results})
+    
+    handleSubmit = e => {
+        e.preventDefault();
+        const { query } = this.state;
+        this.onSubmit(query)
     }
 
+
+    fetchMovie = async (query) => {
+        const response = await Axios.get(`https://api.themoviedb.org/3/search/movie?api_key=a11681fbc130343b10afc879742afe20&query=${query}&page=1`)
+        this.setState({ movies: response.data.results })
+        this.setState({ query: '' })
+    }
+
+    onSubmit = (query) => {
+        
+        this.setState({ query });
+        this.fetchMovie(query);
+
+        this.props.history.push({
+            pathname: this.props.location.pathname,
+            search: `query=${query}`,
+        })
+    }
 
 
     render() {
@@ -55,19 +72,13 @@ class MoviesPage extends Component{
                 <ul>
                     {movies.map(({ title, id }) => {
                         return <li key={id}>
-                        <Link to={`/movies/${id}`}>{title}</Link></li>
+                            <Link  to={`/movies/${id}`}>{title}</Link></li>
                     })}
                 </ul>
-              
             </>
-                 
         )
     }
-
-
-
 }
 
-// https://api.themoviedb.org/3/search/movie?api_key=a11681fbc130343b10afc879742afe20&query=&page=1
 
 export default MoviesPage;

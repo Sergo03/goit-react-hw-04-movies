@@ -10,8 +10,6 @@ class Reviews extends Component{
       const {movieId} = this.props.match.params
       const response = await Axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=a11681fbc130343b10afc879742afe20&page=1`)
       this.setState({ reviews:response.data.results })
-    
-    console.log(response.data.results);
   }
 
   render() {
@@ -19,14 +17,13 @@ class Reviews extends Component{
     
     return (
       <><ul>
-        {reviews.map(({ author, content,id }) => {
+        {reviews.map(({ author, content, id }) => {
           return <li key={id}> <p>{author}</p>  {content}</li>
         })}
-        </ul>
-        </>
+      </ul>
+      </>
     )
   }
-  
 }
 
 export default Reviews
