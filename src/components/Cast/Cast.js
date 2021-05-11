@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import Axios from 'axios';
 
+
+
 class Cast extends Component{
   state = {
     cast:[]
@@ -31,6 +33,8 @@ class Cast extends Component{
   }
 
 }
+
+
 
 export default Cast;
 

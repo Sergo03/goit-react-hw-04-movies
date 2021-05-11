@@ -39,6 +39,9 @@ li {
   color: red;
   text-decoration: none;
 }
+.NavLink:hover {
+  color: red;
+}
 .main-link-item {
   margin-right: 15px;
 }

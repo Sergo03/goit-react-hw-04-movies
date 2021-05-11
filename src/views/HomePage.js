@@ -23,9 +23,9 @@ class HomePage extends Component {
         return (
             <>
                 <ul>
-                    {movies.map(({id,title,name}) => (
-                         <li key={id}>
-                                <Link to={`/movies/${id}`}>{title}</Link>
+                    {movies.map(({ id, title, name }) => (
+                        <li key={id}>
+                            <Link className="NavLink" to={`/movies/${id}`}>{title}</Link>
                         </li>
                     ))}
                 </ul>

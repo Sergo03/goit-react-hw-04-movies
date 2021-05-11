@@ -1,6 +1,9 @@
 import React, { Component} from 'react';
 import Axios from 'axios';
 
+
+
+
 class Reviews extends Component{
   state = {
     reviews:[]
@@ -16,15 +19,17 @@ class Reviews extends Component{
     const {reviews}=this.state
     
     return (
-      <><ul>
+      <> {reviews.length>0 ? <ul>
         {reviews.map(({ author, content, id }) => {
           return <li key={id}> <p>{author}</p>  {content}</li>
         })}
-      </ul>
+      </ul>: <p>Wo don't have any reviews</p> }
       </>
     )
   }
 }
+
+
 
 export default Reviews
 
